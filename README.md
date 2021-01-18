@@ -10,7 +10,7 @@ Está versão foi desenvolvida apenas com os conhecimentos adquiridos até o mom
 
 
 <div align="center" style="margin-bottom: 20px;">
-<img src=".public/assets/img1.png" alt="Proffy" width="650" height="310"/>
+<img src="public/assets/img1.png" alt="" width="650" height="310"/>
 </div>
 
 
