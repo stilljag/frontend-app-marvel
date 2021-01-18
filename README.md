@@ -4,9 +4,23 @@
 
 
 ## Front-end da aplicação
-Está versão foi desenvolvida apenas com os conhecimentos adquiridos até o momento. 
 
-------------
+```bash
+# Clone o repositório
+$ git clone https://github.com/stilljag/frontend-app-marvel.git
+
+# Acesse pelo terminal.
+$ cd frontend-app-marvel
+
+# Instale as dependencias
+$ yarn 
+
+# Rode o app
+$ yarn dev
+
+# Acesse pelo navegador http://localhost:8080
+```
+<hr>
 
 
 <div align="center" style="margin-bottom: 20px;">
