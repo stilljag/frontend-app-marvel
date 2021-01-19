@@ -3,7 +3,6 @@ import axios from "axios";
 class App {
   constructor() {
     this.url = `http://localhost:3333/characters`;
-
     this.offset = 0;
     this.searchID = 0;
     this.tableBody = document.getElementById("characters");
@@ -18,21 +17,19 @@ class App {
   }
   actions() {
     this.buttonSearch.onclick = (event) => this.searchCharacter(event);
-    this.tableBody.onclick = (event) => this.viewCharacter(event);
-
     this.home.onclick = () => {
-      this.viewChar.style.display = "block";
       this.content.style.display = "none";
+      this.viewChar.style.display = "block";
       this.getCharacters();
     };
   }
 
   async getCharacters() {
     try {
-      const result = await axios.get(`${this.url}/${this.offset}`);
-      this.searchID = result.data.characters;
-      this.populate(result.data.characters);
-      this.paginate(result.data.total);
+      const { data } = await axios.get(`${this.url}?offset=${this.offset}`);
+      this.searchID = data.characters;
+      this.populate(data.characters);
+      this.paginate(data.total);
     } catch (error) {
       console.log(error);
     }
@@ -42,9 +39,13 @@ class App {
     this.tableBody.innerHTML = "";
     //name, id, thumbnail(path,extension)
     data.forEach((item) => {
-      const tr = `<input type="image" class="img-button" width="90" height="90" data-id="${item.id}" title="${item.name}" src="${item.thumbnail.path}.${item.thumbnail.extension}">`;
+      const tr = `<input type="image" class="img-button" width="120" height="120" data-id="${item.id}" title="${item.name}" src="${item.thumbnail.path}.${item.thumbnail.extension}">`;
 
       this.tableBody.innerHTML += tr;
+    });
+
+    document.querySelectorAll(".img-button").forEach((item) => {
+      item.onclick = (event) => this.viewCharacter(event);
     });
   }
 
@@ -58,12 +59,10 @@ class App {
     } else {
       try {
         this.tableBody.innerHTML = "";
-        const result = await axios.get(
-          `${this.url}/search/${this.search.value}`
-        );
+        const result = await axios.get(`${this.url}/${this.search.value}`);
         this.searchID = result.data.data;
         result.data.data.forEach((item) => {
-          const tr = `<input type="image" class="img-button" width="90" height="90" data-id="${item.id}" title="${item.name}" src="${item.thumbnail.path}.${item.thumbnail.extension}">`;
+          const tr = `<input type="image" "class="img-button" width="90" height="90" data-id="${item.id}" title="${item.name}" src="${item.thumbnail.path}.${item.thumbnail.extension}">`;
 
           this.tableBody.innerHTML += tr;
         });
@@ -71,6 +70,12 @@ class App {
         console.log(error);
       }
     }
+    document.querySelectorAll(".img-button").forEach((item) => {
+      item.onclick = (event) => {
+        console.log("click");
+        this.viewCharacter(event);
+      };
+    });
   }
 
   async viewCharacter(event) {
@@ -78,15 +83,31 @@ class App {
     this.content.style.display = "none";
 
     const id = parseInt(event.target.dataset.id);
-
+    let thumbnail = [];
+    let extension = [];
+    let src = "";
     const filter = this.searchID.filter((item) => {
+      if (item.id === id) {
+        thumbnail.push(item.thumbnail.path);
+        extension.push(item.thumbnail.extension);
+
+        thumbnail.forEach((item) => {
+          if (item.indexOf("image_not_available") !== -1) {
+            console.log("achou");
+            src =
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKfzTEuUt7krOR9GP2PPBsnr6wlClS6_MceQ&usqp=CAU";
+          } else {
+            src = `${thumbnail}.${extension}`;
+          }
+        });
+      }
       return item.id === id;
     });
     this.viewChar.innerHTML = `<div class="row">
     <div class="col-12">
       <div class="d-flex justify-content-left">
         <img
-          src="${filter[0].thumbnail.path}.${filter[0].thumbnail.extension}"
+          src="${src}"
           class="img-thumbnail"
           alt="..."
           style="width: 35rem; height: 35rem"
