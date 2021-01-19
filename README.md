@@ -1,12 +1,26 @@
 # AppMarvel
 
-![HTML](https://img.shields.io/badge/HTML-orange) ![CSS](https://img.shields.io/badge/CSS-blue) ![BOOT](https://img.shields.io/badge/BOOTSTRAP-purple) ![JS](https://img.shields.io/badge/JAVASCRIPT-yellow)  [![The MIT License](https://img.shields.io/badge/LICENSE-MIT-green.svg?style=flat-square)](http://github.com/stilljag/frontend-app-marvel/blob/master/LICENSE.md)
+![HTML](https://img.shields.io/badge/HTML-orange) ![CSS](https://img.shields.io/badge/CSS-blue) ![BOOT](https://img.shields.io/badge/BOOTSTRAP-purple) ![NODEJS](https://img.shields.io/badge/NODEJS-yellow)  [![The MIT License](https://img.shields.io/badge/LICENSE-MIT-green.svg?style=flat-square)](http://github.com/stilljag/frontend-app-marvel/blob/master/LICENSE.md)
 
 
 ## Front-end da aplicação
-Está versão foi desenvolvida apenas com os conhecimentos adquiridos até o momento. 
 
-------------
+```bash
+# Clone o repositório
+$ git clone https://github.com/stilljag/frontend-app-marvel.git
+
+# Acesse pelo terminal.
+$ cd frontend-app-marvel
+
+# Instale as dependencias
+$ yarn 
+
+# Rode o app
+$ yarn dev
+
+# Acesse pelo navegador http://localhost:8080
+```
+<hr>
 
 
 <div align="center" style="margin-bottom: 20px;">
